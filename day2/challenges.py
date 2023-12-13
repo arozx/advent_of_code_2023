@@ -67,3 +67,49 @@ result = part1(
     green_count=green_count,
     blue_count=blue_count,
 )
+
+
+# Minimum set of cubes
+def part2(input_str):
+    total = []
+    # open the file
+    with open(input_str, "r") as f:
+        input_str = f.read()
+    for line in input_str.split("\n"):
+        game_id = re.findall(r"Game (\d+):", line)
+        print(game_id)
+
+        blue_l = 0
+        green_l = 0
+        red_l = 0
+
+        # sum of blue
+        blue = re.findall(r"(\d+) blue", line)
+        for i in range(len(blue)):
+            blue[i] = int(blue[i])
+            if blue[i] > blue_l:
+                blue_l = blue[i]
+                print("blue max", blue_l)
+
+        green = re.findall(r"(\d+) green", line)
+        for i in range(len(green)):
+            green[i] = int(green[i])
+            if green[i] > green_l:
+                green_l = green[i]
+                print("green max", green_l)
+
+        red = re.findall(r"(\d+) red", line)
+        for i in range(len(red)):
+            red[i] = int(red[i])
+            if red[i] > red_l:
+                red_l = red[i]
+                print("red max", red_l)
+
+        power = blue_l * green_l * red_l
+        print("power", power)
+        total.append(power)
+
+    print("power of the minimum set of cubes", sum(total))
+
+
+part2(input_str="input.txt")
